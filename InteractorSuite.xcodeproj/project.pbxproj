@@ -7,7 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F83CD4611B7C87CD009C8B99 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4601B7C87CD009C8B99 /* main.cpp */; };
+		F83CD4751B7C88CF009C8B99 /* ProcessBAMFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4671B7C88CF009C8B99 /* ProcessBAMFiles.cpp */; };
+		F83CD4781B7CB790009C8B99 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F83CD4771B7CB790009C8B99 /* boost.framework */; };
+		F83CD4861B7CBA21009C8B99 /* alglibinternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4791B7CBA1F009C8B99 /* alglibinternal.cpp */; };
+		F83CD4871B7CBA21009C8B99 /* alglibmisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD47A1B7CBA1F009C8B99 /* alglibmisc.cpp */; };
+		F83CD4881B7CBA21009C8B99 /* ap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD47B1B7CBA1F009C8B99 /* ap.cpp */; };
+		F83CD4891B7CBA21009C8B99 /* dataanalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD47C1B7CBA1F009C8B99 /* dataanalysis.cpp */; };
+		F83CD48A1B7CBA21009C8B99 /* diffequations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD47D1B7CBA20009C8B99 /* diffequations.cpp */; };
+		F83CD48B1B7CBA21009C8B99 /* fasttransforms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD47E1B7CBA20009C8B99 /* fasttransforms.cpp */; };
+		F83CD48C1B7CBA21009C8B99 /* integration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD47F1B7CBA20009C8B99 /* integration.cpp */; };
+		F83CD48D1B7CBA21009C8B99 /* interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4801B7CBA20009C8B99 /* interpolation.cpp */; };
+		F83CD48E1B7CBA21009C8B99 /* linalg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4811B7CBA20009C8B99 /* linalg.cpp */; };
+		F83CD48F1B7CBA21009C8B99 /* optimization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4821B7CBA20009C8B99 /* optimization.cpp */; };
+		F83CD4901B7CBA21009C8B99 /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4831B7CBA20009C8B99 /* solvers.cpp */; };
+		F83CD4911B7CBA21009C8B99 /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4841B7CBA21009C8B99 /* specialfunctions.cpp */; };
+		F83CD4921B7CBA21009C8B99 /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CD4851B7CBA21009C8B99 /* statistics.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +38,30 @@
 
 /* Begin PBXFileReference section */
 		F83CD45D1B7C87CD009C8B99 /* InteractorSuite */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = InteractorSuite; sourceTree = BUILT_PRODUCTS_DIR; };
-		F83CD4601B7C87CD009C8B99 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F83CD4671B7C88CF009C8B99 /* ProcessBAMFiles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProcessBAMFiles.cpp; path = src/ProcessBAMFiles.cpp; sourceTree = "<group>"; };
+		F83CD4691B7C88CF009C8B99 /* Probes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Probes.h; path = src/Probes.h; sourceTree = "<group>"; };
+		F83CD46A1B7C88CF009C8B99 /* BackgroundInteractionFrequency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackgroundInteractionFrequency.h; path = src/BackgroundInteractionFrequency.h; sourceTree = "<group>"; };
+		F83CD46B1B7C88CF009C8B99 /* Data_Structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Data_Structures.h; path = src/Data_Structures.h; sourceTree = "<group>"; };
+		F83CD46C1B7C88CF009C8B99 /* Find_Interactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Find_Interactions.h; path = src/Find_Interactions.h; sourceTree = "<group>"; };
+		F83CD46F1B7C88CF009C8B99 /* ProcessBAMFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProcessBAMFiles.h; path = src/ProcessBAMFiles.h; sourceTree = "<group>"; };
+		F83CD4711B7C88CF009C8B99 /* Promoters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Promoters.h; path = src/Promoters.h; sourceTree = "<group>"; };
+		F83CD4731B7C88CF009C8B99 /* RESitesCount_MemAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESitesCount_MemAccess.h; path = src/RESitesCount_MemAccess.h; sourceTree = "<group>"; };
+		F83CD4741B7C88CF009C8B99 /* SupplementaryFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SupplementaryFunctions.h; path = src/SupplementaryFunctions.h; sourceTree = "<group>"; };
+		F83CD4761B7CA3B7009C8B99 /* Proximities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Proximities.h; path = src/Proximities.h; sourceTree = "<group>"; };
+		F83CD4771B7CB790009C8B99 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = ../../../../../External/boost/osx/framework/boost.framework; sourceTree = "<group>"; };
+		F83CD4791B7CBA1F009C8B99 /* alglibinternal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = alglibinternal.cpp; path = ../../../../../External/alglib/src/alglibinternal.cpp; sourceTree = "<group>"; };
+		F83CD47A1B7CBA1F009C8B99 /* alglibmisc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = alglibmisc.cpp; path = ../../../../../External/alglib/src/alglibmisc.cpp; sourceTree = "<group>"; };
+		F83CD47B1B7CBA1F009C8B99 /* ap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ap.cpp; path = ../../../../../External/alglib/src/ap.cpp; sourceTree = "<group>"; };
+		F83CD47C1B7CBA1F009C8B99 /* dataanalysis.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dataanalysis.cpp; path = ../../../../../External/alglib/src/dataanalysis.cpp; sourceTree = "<group>"; };
+		F83CD47D1B7CBA20009C8B99 /* diffequations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = diffequations.cpp; path = ../../../../../External/alglib/src/diffequations.cpp; sourceTree = "<group>"; };
+		F83CD47E1B7CBA20009C8B99 /* fasttransforms.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = fasttransforms.cpp; path = ../../../../../External/alglib/src/fasttransforms.cpp; sourceTree = "<group>"; };
+		F83CD47F1B7CBA20009C8B99 /* integration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = integration.cpp; path = ../../../../../External/alglib/src/integration.cpp; sourceTree = "<group>"; };
+		F83CD4801B7CBA20009C8B99 /* interpolation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = interpolation.cpp; path = ../../../../../External/alglib/src/interpolation.cpp; sourceTree = "<group>"; };
+		F83CD4811B7CBA20009C8B99 /* linalg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = linalg.cpp; path = ../../../../../External/alglib/src/linalg.cpp; sourceTree = "<group>"; };
+		F83CD4821B7CBA20009C8B99 /* optimization.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = optimization.cpp; path = ../../../../../External/alglib/src/optimization.cpp; sourceTree = "<group>"; };
+		F83CD4831B7CBA20009C8B99 /* solvers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = solvers.cpp; path = ../../../../../External/alglib/src/solvers.cpp; sourceTree = "<group>"; };
+		F83CD4841B7CBA21009C8B99 /* specialfunctions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = specialfunctions.cpp; path = ../../../../../External/alglib/src/specialfunctions.cpp; sourceTree = "<group>"; };
+		F83CD4851B7CBA21009C8B99 /* statistics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = statistics.cpp; path = ../../../../../External/alglib/src/statistics.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F83CD4781B7CB790009C8B99 /* boost.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +79,20 @@
 		F83CD4541B7C87CD009C8B99 = {
 			isa = PBXGroup;
 			children = (
+				F83CD4791B7CBA1F009C8B99 /* alglibinternal.cpp */,
+				F83CD47A1B7CBA1F009C8B99 /* alglibmisc.cpp */,
+				F83CD47B1B7CBA1F009C8B99 /* ap.cpp */,
+				F83CD47C1B7CBA1F009C8B99 /* dataanalysis.cpp */,
+				F83CD47D1B7CBA20009C8B99 /* diffequations.cpp */,
+				F83CD47E1B7CBA20009C8B99 /* fasttransforms.cpp */,
+				F83CD47F1B7CBA20009C8B99 /* integration.cpp */,
+				F83CD4801B7CBA20009C8B99 /* interpolation.cpp */,
+				F83CD4811B7CBA20009C8B99 /* linalg.cpp */,
+				F83CD4821B7CBA20009C8B99 /* optimization.cpp */,
+				F83CD4831B7CBA20009C8B99 /* solvers.cpp */,
+				F83CD4841B7CBA21009C8B99 /* specialfunctions.cpp */,
+				F83CD4851B7CBA21009C8B99 /* statistics.cpp */,
+				F83CD4771B7CB790009C8B99 /* boost.framework */,
 				F83CD45F1B7C87CD009C8B99 /* InteractorSuite */,
 				F83CD45E1B7C87CD009C8B99 /* Products */,
 			);
@@ -57,7 +109,16 @@
 		F83CD45F1B7C87CD009C8B99 /* InteractorSuite */ = {
 			isa = PBXGroup;
 			children = (
-				F83CD4601B7C87CD009C8B99 /* main.cpp */,
+				F83CD4671B7C88CF009C8B99 /* ProcessBAMFiles.cpp */,
+				F83CD4761B7CA3B7009C8B99 /* Proximities.h */,
+				F83CD4691B7C88CF009C8B99 /* Probes.h */,
+				F83CD46A1B7C88CF009C8B99 /* BackgroundInteractionFrequency.h */,
+				F83CD46B1B7C88CF009C8B99 /* Data_Structures.h */,
+				F83CD46C1B7C88CF009C8B99 /* Find_Interactions.h */,
+				F83CD46F1B7C88CF009C8B99 /* ProcessBAMFiles.h */,
+				F83CD4711B7C88CF009C8B99 /* Promoters.h */,
+				F83CD4731B7C88CF009C8B99 /* RESitesCount_MemAccess.h */,
+				F83CD4741B7C88CF009C8B99 /* SupplementaryFunctions.h */,
 			);
 			path = InteractorSuite;
 			sourceTree = "<group>";
@@ -118,7 +179,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F83CD4611B7C87CD009C8B99 /* main.cpp in Sources */,
+				F83CD4861B7CBA21009C8B99 /* alglibinternal.cpp in Sources */,
+				F83CD4871B7CBA21009C8B99 /* alglibmisc.cpp in Sources */,
+				F83CD4881B7CBA21009C8B99 /* ap.cpp in Sources */,
+				F83CD4891B7CBA21009C8B99 /* dataanalysis.cpp in Sources */,
+				F83CD48A1B7CBA21009C8B99 /* diffequations.cpp in Sources */,
+				F83CD48B1B7CBA21009C8B99 /* fasttransforms.cpp in Sources */,
+				F83CD48C1B7CBA21009C8B99 /* integration.cpp in Sources */,
+				F83CD48D1B7CBA21009C8B99 /* interpolation.cpp in Sources */,
+				F83CD48E1B7CBA21009C8B99 /* linalg.cpp in Sources */,
+				F83CD48F1B7CBA21009C8B99 /* optimization.cpp in Sources */,
+				F83CD4901B7CBA21009C8B99 /* solvers.cpp in Sources */,
+				F83CD4911B7CBA21009C8B99 /* specialfunctions.cpp in Sources */,
+				F83CD4921B7CBA21009C8B99 /* statistics.cpp in Sources */,
+				F83CD4751B7C88CF009C8B99 /* ProcessBAMFiles.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +279,18 @@
 		F83CD4651B7C87CD009C8B99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/pelinakan/External/boost/osx/framework,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/pelinakan/External/bamtools/include/**",
+					"/Users/pelinakan/External/alglib/src/**",
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/pelinakan/External/bamtools/lib/**";
+				OTHER_LDFLAGS = "-lbamtools";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +298,18 @@
 		F83CD4661B7C87CD009C8B99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/pelinakan/External/boost/osx/framework,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/pelinakan/External/bamtools/include/**",
+					"/Users/pelinakan/External/alglib/src/**",
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/pelinakan/External/bamtools/lib/**";
+				OTHER_LDFLAGS = "-lbamtools";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -235,6 +333,7 @@
 				F83CD4661B7C87CD009C8B99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
