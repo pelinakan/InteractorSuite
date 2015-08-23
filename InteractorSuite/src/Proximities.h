@@ -17,6 +17,7 @@ void ProximityClass::AnnotateDistalInteractor(ProbeSet& probes, int probe_index,
     const int offset = 0;
     // Intra chromosomal interaction
     if(anchored_chr.compare(interactor_chr) == 0){
+    //    cout << "dist " << abs(anchored_resite - interactor_resite) << "  " << probe_index << endl;
         if( (abs(anchored_resite - interactor_resite)) > MinimumJunctionDistance){ // at least minjunctdist away
             PopulateInteractions(probes.Probes[probe_index].feature.Signals.signals, interactor_resite, ExperimentNo);
         }
@@ -81,6 +82,7 @@ void ProximityClass::PopulateInteractions(boost::unordered::unordered_map<int, i
     else{ // if inserted before
         (signals[interactor_resite][ExperimentNo + offset]) = signals[interactor_resite][ExperimentNo + offset] + 1.0;
     }
+//    cout << interactor_resite << "  " << signals[interactor_resite][ExperimentNo + offset] << endl;
 }
 
 

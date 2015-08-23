@@ -50,6 +50,8 @@ void ProbeSet::GetProbeFeats(stringstream& line, CaptureProbes& t){
         else
             t.annotated = 3;
     }
+    
+//    cout << t.target_id << "  " << t.annotated << endl;
 }
 
 void ProbeSet::ReadProbeCoordinates(){
@@ -73,8 +75,6 @@ void ProbeSet::ReadProbeCoordinates(){
 	chr1=tempprobe.chr;
 	ChrRowStartIndexes.push_back(index);
 	ChrNames.push_back(chr1);
-	tempprobe.annotated = 0;
-	tempprobe.conflicting_annotations = 0;
 	Probes.push_back(tempprobe);
 	++index;
 	do{
@@ -91,13 +91,11 @@ void ProbeSet::ReadProbeCoordinates(){
             stringstream probeline ( pline );
 			GetProbeFeats(probeline,tempprobe);
 			chr2 = tempprobe.chr;
-			tempprobe.annotated = 0;
-			tempprobe.conflicting_annotations = 0;
 			Probes.push_back(tempprobe);
-        //    cout << index << "   " << Probes[index].chr << "   " << Probes[index].start << endl;
+        //    cout << index << "   " << Probes[index].chr << "   " << Probes[index].start << "  " << Probes[index].target_id << "  " << Probes[index].annotated << "  " << endl;
 			++index;
 		}
-        cout << "Probes on  " << chr1 << "  read" << endl;
+     //   cout << "Probes on  " << chr1 << "  read" << endl;
 		ChrRowEndIndexes.push_back(index-2);
 		if(pline != ""){
 			ChrRowStartIndexes.push_back(index-1);
@@ -108,7 +106,8 @@ void ProbeSet::ReadProbeCoordinates(){
 	}while(!probefile.eof()&& pline!="" && pline != "END");
 	Probes.pop_back();
 
-	cout << "Probe Coordinates Read " << endl;
+	cout << Probes.size() <<  "   Probe Coordinates Read " << endl;
+    
 }
 
 
@@ -154,23 +153,23 @@ int probe_index = -1, startsearch, endsearch;
 
 startsearch = 0;
 endsearch = -1;
-    
-for(int i = 0; i < ChrNames.size();++i){
+    int i;
+for(i = 0; i < ChrNames.size();++i){
 	if(pchr == ChrNames[i]){
 		startsearch = ChrRowStartIndexes[i];
 		endsearch = ChrRowEndIndexes[i];
 		break;
 	}
 }
-  //  cout << startsearch << "  " << endsearch << endl;
+ //   cout << startsearch << "  " << endsearch << endl;
 for(probe_index = startsearch; probe_index <= endsearch; ++probe_index){
-   // cout << Probes[probe_index].start << "  " << readstart << "   " << Probes[probe_index].end << "  " << readend << "  " << probe_index << endl;
+  //  cout << Probes[probe_index].start << "  " << readstart << "   " << Probes[probe_index].end << "  " << readend << "  " << probe_index << endl;
     if (CheckFragment_ifContainedwithinInterval((Probes[probe_index].start - padding),(Probes[probe_index].end + padding), readstart, readend)){
    //  cout << " on probe" << Probes[probe_index].start << "  " << readstart << "   " << Probes[probe_index].end << "  " << readend << "  " << probe_index << endl ;
         return probe_index;
     }
 }
-return probe_index;
+return -1;
 }
 
 

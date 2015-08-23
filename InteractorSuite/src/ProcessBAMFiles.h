@@ -10,11 +10,12 @@ public:
     void ProcessTheBAMFile(PromoterClass&, ProbeSet&, ProximityClass proximities, RESitesClass, string, int, string);
 private:
     boost::unordered::unordered_map<int, string> RefIDtoChrNames;
+    boost::unordered::unordered_map<int, int> RefIDtoChrLength;
 	void ProcessPair(BamTools::BamAlignment&, BamTools::BamAlignment&, string, ProbeSet, PromoterClass, RESitesClass, ProximityClass proximities, int);
 	void ProcessPair_CTX(BamTools::BamAlignment& al, BamTools::BamAlignment& almate, ProbeSet, PromoterClass, RESitesClass, ProximityClass proximities, int);
     bool AnnotatePair(string, string, int, int, int, int, ProbeSet&, PromoterClass&, RESitesClass, ProximityClass proximities, int);
 };
-
+ofstream tempfile("Reads_chrX.bed");
 void ProcessBAM::ProcessPair(BamTools::BamAlignment& al, BamTools::BamAlignment& almate, string whichchr, ProbeSet prs, PromoterClass promoters, RESitesClass dpnII, ProximityClass proximities, int ExperimentNo){
     bool onchr_1 = 0, onchr_2 = 0;
     boost::unordered::unordered_map<int, string>::const_iterator it1 = RefIDtoChrNames.find(al.RefID);
@@ -28,11 +29,12 @@ void ProcessBAM::ProcessPair(BamTools::BamAlignment& al, BamTools::BamAlignment&
         if(it2->second == whichchr)
             onchr_2 = 1;
     }
+    //cout << it1->second << "   " << it2->second << "   " << al.Position << "   " << almate.Position << " on chr" << endl;
     if(onchr_1 && onchr_2){
        // string chr1 = "chr", chr2 = "chr";
        // chr1.append(it1->second);
        // chr2.append(it2->second);
- //       cout << it1->second << "   " << it2->second << "   " << al.Position << "   " << almate.Position << " on chr" << endl;
+       //cout << it1->second << "   " << it2->second << "   " << al.Position << "   " << almate.Position << " on chr" << endl;
         AnnotatePair(it1->second, it2->second, al.Position, almate.Position, al.Length, almate.Length, prs, promoters, dpnII, proximities, ExperimentNo);
     }
   //  cout << it1->second << "   " << it2->second << "   " << al.Position << "   " << almate.Position << endl;
@@ -62,7 +64,7 @@ void ProcessBAM::ProcessTheBAMFile(PromoterClass& promoters, ProbeSet& prs, Prox
 	NofPairs_Both_on_Probe = 0;
 	NofPairsNoAnn = 0;
     
-
+    
 	BamReader reader;
 	if ( !reader.Open(BAMFILENAME.c_str()) ) {
 		cerr << "could not open input BAM files." << endl;
@@ -77,15 +79,15 @@ void ProcessBAM::ProcessTheBAMFile(PromoterClass& promoters, ProbeSet& prs, Prox
 	for (chrit = references.begin(); chrit != references.end(); ++chrit){
 		int key = reader.GetReferenceID(chrit->RefName);
 		RefIDtoChrNames[key] = chrit->RefName;
+        RefIDtoChrLength[key]= chrit->RefLength;
 		//	cout << chrit->RefName << '\t' << key << endl;
 	}
-    BamAlignment al, almate;
+    BamAlignment al;
     unsigned long int pcount = 0;
     if(whichchr == "CTX" || whichchr == "ctx" || whichchr == "Ctx"){ // Only process inter-chr interactions
 		cout << "Reading BAM file for  inter-chromosomal pairs..." << endl;
        while ( reader.GetNextAlignmentCore(al) ){
-			reader.GetNextAlignmentCore(almate);
-			ProcessPair_CTX(al, almate, prs, promoters, dpnII, proximities, ExperimentNo);
+			ProcessPair_CTX(al, al, prs, promoters, dpnII, proximities, ExperimentNo);
         }
     }
 	else{ // PROCESS THE CHROMOSOME GIVEN
@@ -104,24 +106,28 @@ void ProcessBAM::ProcessTheBAMFile(PromoterClass& promoters, ProbeSet& prs, Prox
                     break;
                 }
             }
-            
-            reader.Jump(chrindex);
-            cout << "jumped to " << whichchr << "  " << atoi(whichchr.c_str()) << endl;
+            BamRegion region(chrindex,0, chrindex, RefIDtoChrLength[chrindex]);
+            reader.SetRegion(region);
+            cout << "region set to " << RefIDtoChrNames[chrindex] << "  " << 0 << "  " << RefIDtoChrNames[chrindex] << "  " << RefIDtoChrLength[chrindex] << endl;
+   //         reader.Jump(chrindex);
+   //         cout << "jumped to " << whichchr << "  " << atoi(whichchr.c_str()) << endl;
         }
-        while ( reader.GetNextAlignmentCore(al) ){
-			reader.GetNextAlignmentCore(almate);
+        while ( reader.GetNextAlignment(al) ){
+        //    cout << al.Name << "   " << al.RefID << "  " << al.Position << "  " << al.MateRefID << "  " << al.MatePosition << "  "  << endl;
             ++pcount;
-            if(pcount %50000 == 0)
+            if(pcount %1000 == 0)
                 cout << pcount << " pairs read" << endl;
-			ProcessPair(al, almate, whichchr, prs, promoters, dpnII, proximities, ExperimentNo);
+            //cout << abs(al.Position - (almate.Position + almate.Length)) << "  " << MinimumJunctionDistance << endl;
+            if(abs((al.RefID == al.MateRefID) && (al.Position - (al.MatePosition + al.Length)) >= MinimumJunctionDistance))
+                AnnotatePair(whichchr, whichchr, al.Position, (al.MatePosition + al.Length), al.Length, al.Length, prs, promoters, dpnII, proximities, ExperimentNo);
+		//	ProcessPair(al, almate, whichchr, prs, promoters, dpnII, proximities, ExperimentNo);
 	    }
     }
-    cout << "Number of Pairs Both Reads on Probe             " << NofPairs_One_on_Probe << endl;
-    cout << "Number of Pairs One Read on Probe               " << NofPairs_Both_on_Probe << endl;
+    cout << "Number of Pairs Both Reads on Probe             " << NofPairs_Both_on_Probe << endl;
+    cout << "Number of Pairs One Read on Probe               " << NofPairs_One_on_Probe << endl;
     cout << "Number of Pairs None on Probe                   " << NofPairsNoAnn << endl;
     
 }
-
 bool ProcessBAM::AnnotatePair(string chr_1, string chr_2, int startcoord, int endcoord, int firstinpair_len, int secondinpair_len, ProbeSet& Probe_Set, PromoterClass &proms, RESitesClass dpnII, ProximityClass proximities, int ExperimentNo){
     
     bool annprom_firstread = 0;
@@ -132,9 +138,10 @@ bool ProcessBAM::AnnotatePair(string chr_1, string chr_2, int startcoord, int en
     renums1 = new int [2];	renums2 = new int [2];
     
     bool re1found = dpnII.GettheREPositions(chr_1, startcoord,renums1);
-    bool re2found = dpnII.GettheREPositions(chr_2, (endcoord + 1),renums2);
+    bool re2found = dpnII.GettheREPositions(chr_2, (endcoord),renums2);
     
-  //  cout << "re coords " << chr_1 << "  " << startcoord << "  " << renums1[0] << "   " << chr_2 << "   " << endcoord << "  " << renums2[0] << endl;
+ //   cout << "re coords " << chr_1 << "  " << startcoord << "  " << renums1[0] << "   " << chr_2 << "   " << endcoord << "  " << renums2[0] << "  " << endcoord - startcoord << "  ";
+   // cout << (endcoord - startcoord) << "  " << (renums2[0] - renums1[0]) << endl;
     if(re1found)
         resite_firstinpair = renums1[0];
     else
@@ -144,6 +151,10 @@ bool ProcessBAM::AnnotatePair(string chr_1, string chr_2, int startcoord, int en
     else
         resite_secondinpair = endcoord;
     
+    if(renums1[0] == renums2[0])
+        return 0;
+    
+  //  tempfile << chr_1 << '\t' << startcoord << '\t' << startcoord+firstinpair_len << endl << chr_2 << '\t' << endcoord << '\t' << endcoord+secondinpair_len << endl;
     int probeindex_firstread = Probe_Set.AssociateReadwithProbes(chr_1, startcoord, (startcoord + firstinpair_len), proms); // First read start and end
     if (probeindex_firstread == -1)
         annprom_firstread = proms.AnnotatewithPromoters(chr_1, startcoord, firstinpair_len); // Check if it is close to a promoter without a probe
@@ -152,24 +163,26 @@ bool ProcessBAM::AnnotatePair(string chr_1, string chr_2, int startcoord, int en
     if (probeindex_secondread == -1)
         annprom_secondread = proms.AnnotatewithPromoters(chr_2, endcoord, (endcoord + secondinpair_len)); // Check if it is close to a promoter without a probe
     
-    //cout << probeindex_firstread << "  " << probeindex_secondread << endl;
+  //  cout << probeindex_firstread << "  " << probeindex_secondread << endl;
     
     if (probeindex_firstread == -1 && probeindex_secondread == -1){ // If none on probes
         ++NofPairsNoAnn;
         return 0;
     }
+    /*
     if ((probeindex_firstread != -1) && (probeindex_secondread != -1)) { // If both on probes
         proximities.AnnotateFeatFeatInteraction(Probe_Set, probeindex_firstread, probeindex_secondread, ExperimentNo);
         proximities.AnnotateFeatFeatInteraction(Probe_Set, probeindex_secondread, probeindex_firstread, ExperimentNo);
         ++NofPairs_Both_on_Probe;
+    //    cout << probeindex_firstread << "  " << probeindex_secondread << endl;
         return 1;
     }
-    
+    */
     if (probeindex_firstread != -1 ) // If first read is annotated with a probe
         proximities.AnnotateDistalInteractor(Probe_Set, probeindex_firstread, chr_1, chr_2, resite_firstinpair, resite_secondinpair, ExperimentNo);
     else
         proximities.AnnotateDistalInteractor(Probe_Set, probeindex_secondread, chr_2, chr_1, resite_secondinpair, resite_firstinpair, ExperimentNo);
-    
+    //cout << probeindex_firstread << "  " << probeindex_secondread << endl;
     ++NofPairs_One_on_Probe;
     return 1;
 }

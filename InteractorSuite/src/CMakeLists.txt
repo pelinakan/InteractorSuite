@@ -1,4 +1,3 @@
-
 #g++ -I include -I /mnt/crick/pelina/bin/boost_1_54_0 
 #     -L /home/rickards/testprojects/rnaseqpipeline/programs/bamtools/lib 
 #     -I /home/rickards/testprojects/rnaseqpipeline/programs/bamtools/include 
@@ -28,13 +27,6 @@ if(OPENMP_FOUND)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-set(Boost_USE_STATIC_LIBS        ON) # only find static libs
-set(Boost_USE_MULTITHREADED      ON)
-set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.54.0)
-if(Boost_FOUND)
-  include_directories(${Boost_INCLUDE_DIRS})  
-
   # set our library and executable destination dirs
   set( EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin" )
   
@@ -43,12 +35,11 @@ if(Boost_FOUND)
   set_property(TARGET AnalyseHiCap_perChr PROPERTY CXX_STANDARD 11)
   set_property(TARGET AnalyseHiCap_perChr PROPERTY CXX_STANDARD_REQUIRED ON)
 
-
   find_package(ZLIB REQUIRED)
   add_library(libbamtools STATIC IMPORTED)
-  set_target_properties(libbamtools PROPERTIES IMPORTED_LOCATION /home/rickards/testprojects/rnaseqpipeline/programs/bamtools/lib/libbamtools.a)	
-  include_directories(/home/rickards/testprojects/rnaseqpipeline/programs/bamtools/include)
-  link_directories(/home/rickards/testprojects/rnaseqpipeline/programs/bamtools/lib)
+  set_target_properties(libbamtools PROPERTIES IMPORTED_LOCATION /sw/apps/bioinfo/bamtools/2.3.0/milou/lib/libbamtools.so.2.3.0)	
+  include_directories(/sw/apps/bioinfo/bamtools/2.3.0/milou/include)
+  include_directories(/pica/h1/pelin/External/boost_1_58_0)
+  link_directories(/sw/apps/bioinfo/bamtools/2.3.0/milou/lib)
   target_link_libraries( AnalyseHiCap_perChr libbamtools ${ZLIB_LIBRARIES})
-endif()
 

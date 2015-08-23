@@ -98,6 +98,8 @@ void PromoterClass::ReadPromoterAnnotation(RESitesClass& dpnIIsites, Mappability
     string temp,tr1, tr2;
     vector< int > isoformpromotercoords;
     vector< string > tr_ids;
+    NofGenes = 0;
+    NofTranscripts = 0;
     
     string RefSeqfilename;
     RefSeqfilename.append(dirname);
@@ -169,7 +171,7 @@ bool PromoterClass::AnnotatewithPromoters(string chr, int pos_firstinpair, int l
             }
         }
     }
-    cout << " Annotated with prom " << pann << endl;
+    //cout << " Annotated with prom " << pann << endl;
     return pann;
 }
 
